@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Sucursal</h1>
+
+<div id="divtabla"></div>
+
+<script src="~/js/sucursal.js"></script>
+<script src="~/js/generic.js"></script>
+
+
+<div class="input-group input-group-sm mb-3">
+    <span class="input-group-text">Ingrese la sucursal a recuperar</span>
+    <input type="text" id="txtSucursalId" class="form-control" aria-label="ID de Sucursal">
+</div>
+
+<button type="button" onclick="recuperarSucursales()" class="btn btn-primary">Recuperar</button>
+
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="txtSucursalNombre">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <button onclick="filtrarSucurcales()" class="btn btn-primary">
+                    Filtrar
+                </button>
+                <button onclick="LimpiarControl()" class="btn btn-primary">
+                    Limpiar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

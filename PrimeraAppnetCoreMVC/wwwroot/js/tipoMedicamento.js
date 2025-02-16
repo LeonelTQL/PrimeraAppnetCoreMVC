@@ -6,9 +6,45 @@ async function listarTipoMedicamento() {
     pintar({
         url: "TipoMedicamento/listarTipoMedicamento",
         cabeceras: ["Id Tipo Medicamento", "Nombre Medicamento", "Descripción"],
-        propiedades: ["idMedicamento", "nombre", "descripcion"]
+        propiedades: ["idMedicamento", "nombre", "descripcion"],
+        transform: function (item) {
+            return {
+                idMedicamento: item.idMedicamento || "",
+                nombre: item.nombre || "",
+                descripcion: item.descripcion || ""
+            };
+        }
     });
 }
+
+async function eliminarMed() {
+    let id = document.getElementById("idEli").value;
+    fetchGet("TipoMedicamento/eliminarMed?id=" + id, "none", function (res) { });
+    alert(id);
+}
+
+async function filtrarMedicamento() {
+    let id = document.getElementById("idMed").value;
+    let nombre = document.getElementById("nombre").value;
+    let idLab = document.getElementById("idLab").value;
+    let idTip = document.getElementById("idTip").value;
+
+    pintar({
+        url: "TipoMedicamento/filtrarMedicamento?idMed=" + id + "&nombre=" + nombre + "&idLab=" + idLab + "&idTip=" + idTip,
+        cabeceras: ["ID Medicamento", "Nombre", "ID Laboratorio", "ID Tipo Medicamento"],
+        propiedades: ["idMedicamento", "nombre", "idLaboratorio", "idTipoMedicamento"]
+    });
+}
+
+function filtrarTipoMedicamento() {
+    let descripcion = document.getElementById("txtDescripcion").value;
+    pintar({
+        url: "TipoMedicamento/FiltrarTipoMedicamento?descripcion=" + descripcion,
+        cabeceras: ["Id Tipo Medicamento", "Nombre Medicamento", "Descripción"],
+        propiedades: ["idMedicamento", "nombre", "descripcion"],
+    });
+}
+
 
     //fetchGet("TipoMedicamento/listarTipoMedicamento", "json", function (res) {
     //    let nroRegistros = res.length;

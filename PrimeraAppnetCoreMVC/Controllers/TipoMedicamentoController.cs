@@ -1,6 +1,7 @@
 ﻿using CapaNegocio;
 using CapaEntidad;
 using Microsoft.AspNetCore.Mvc;
+using CapaDatos;
 
 namespace PrimeraAppnetCoreMVC.Controllers
 {
@@ -38,5 +39,24 @@ namespace PrimeraAppnetCoreMVC.Controllers
             var cadenaDato = root.GetConnectionString("cn");
             return cadenaDato;
         }
-    }
+
+        public List<FiltrarMedicamentoCLS> filtrarMedicamento(int idMed, string nombre, int idLab, int idTip)
+        {
+            TipoMedicamentoDAL obj = new TipoMedicamentoDAL();
+            return obj.FiltrarMedicamento(idMed, nombre, idLab, idTip);
+        }
+
+        public void eliminarMed(int id)
+        {
+            TipoMedicamentoDAL obj = new TipoMedicamentoDAL();
+            obj.EliminarMedicamento(id);
+        }
+
+        public List<TipoMedicamentoCLS> FiltrarTipoMedicamento(string descripcion)
+        {
+            TipoMedicamentoBL obj = new TipoMedicamentoBL();
+            List<TipoMedicamentoCLS> lista = obj.filtrarTipoMedicamento(descripcion);
+            return lista;
+        }
+    }   
 }

@@ -3,10 +3,76 @@
 }
 
 <h1>Tipo Medicamento</h1>
-
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Descripcion">Descripcion:</label>
+                    <input type="text" class="form-control" id="txtDescripcion">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <button onclick="filtrarTipoMedicamento()" class="btn btn-primary">
+                    Filtrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="divtabla">
 
 </div>
-<script src="~/js/tipomedicamento.js"></script>
+<script src="~/js/tipoMedicamento.js"></script>
 <script src="~/js/generic.js"></script>
+
+<div class="input-group input-group-sm mb-3">
+    <span class="input-group-text" id="inputGroup-sizing-sm">ID</span>
+    <input type="text" id="idEli" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+</div>
+<button type="button" onclick="eliminarMed()" class="btn btn-outline-primary">Eliminar</button>
+<dr></dr>
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="idMed">ID Medicamento:</label>
+                    <input type="number" class="form-control" id="idMed" value="0">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="idLab">ID Laboratorio:</label>
+                    <input type="number" class="form-control" id="idLab" value="0">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="idTip">ID Tipo Medicamento:</label>
+                    <input type="number" class="form-control" id="idTip" value="0">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <button onclick="filtrarMedicamento()" class="btn btn-primary">
+                    Filtrar
+                </button>
+                <button onclick="listarTipoMedicamento()" class="btn btn-secondary">
+                    Mostrar Todos
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

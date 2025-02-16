@@ -1,4 +1,10 @@
-﻿async function fetchGet(url, tiporespuesta, callback) {
+﻿
+
+function get(valor) {
+   return document.getElementById(valor).value;
+}
+
+async function fetchGet(url, tiporespuesta, callback) {
     try {
         let raiz = document.getElementById("hdfOculto").value;
         let urlCompleta = window.location.protocol + "//" + window.location.host + "/" + raiz + url;
@@ -62,3 +68,4 @@ function generarTabla(res) {
     contenido += "</tbody></table>";
     return contenido;
 }
+

@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Laboratorios</h1>
+
+<script src="~/js/laboratorio.js"></script>
+<script src="~/js/generic.js"></script>
+
+<div id="divtabla">
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="idLaboratorio">ID Laboratorio:</label>
+                    <input type="number" class="form-control" id="idLaboratorio">
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="direccion">Direccion:</label>
+                    <input type="text" class="form-control" id="direccion">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="personacontacto">Persona de contacto:</label>
+                    <input type="text" class="form-control" id="personacontacto">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <button onclick="filtrarLaboratorio()" class="btn btn-primary">
+                    Filtrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
