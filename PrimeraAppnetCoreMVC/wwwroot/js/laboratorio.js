@@ -2,25 +2,30 @@
     listarLaboratorio();
 };
 
+let objLaboratorio;
 async function listarLaboratorio() {
-    pintar({
+    objLaboratorio = {
         url: "Laboratorio/listarLaboratorio",
-        cabeceras: ["ID Laboratorio","Nombre Laboratorio", "Direccion", "Persona de contacto"],
-        propiedades: ["idLaboratorio","nombre", "direccion", "personacontacto"]
-    });
-}
-async function filtrarLaboratorio() {
-    let idLaboratorio = document.getElementById("idLaboratorio").value;
-    let nombre = document.getElementById("nombre").value;
-    let direccion = document.getElementById("direccion").value;
-    let personacontacto = document.getElementById("personacontacto").value;
-
-    pintar({
-        url: "Laboratorio/filtrarLaboratorio?idLaboratorio=" + encodeURIComponent(idLaboratorio) +
-            "&nombre=" + encodeURIComponent(nombre) +
-            "&direccion=" + encodeURIComponent(direccion) +
-            "&personacontacto=" + encodeURIComponent(personacontacto),
         cabeceras: ["ID Laboratorio", "Nombre Laboratorio", "Direccion", "Persona de contacto"],
         propiedades: ["idLaboratorio", "nombre", "direccion", "personacontacto"]
-    });
+    };
+    pintar(objLaboratorio);
+}
+
+function filtarLaboratorio() {
+    let nombreLaboratorio = get("txtnombre");
+    let direccion = get("txtdireccion");
+    let personacontacto = get("txtpersonacontacto");
+
+    if (nombreLaboratorio === "" && direccion === "" && personacontacto === "") {
+        listarLaboratorio();
+    } else {
+        objLaboratorio.url = "Laboratorio/filtrarLaboratorio?nombre=" + nombreLaboratorio + "&direccion=" + direccion + "&personacontacto=" + personacontacto;
+        pintar(objLaboratorio);
+    }
+}
+
+function buscarLaboratorio() {
+    let forma = document.getElementById("frmBusquedaLabotarorio");
+    let frm = new FormData(forma);
 }

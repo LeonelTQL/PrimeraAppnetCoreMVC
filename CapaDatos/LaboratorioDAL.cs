@@ -46,7 +46,7 @@ namespace CapaDatos
             }
             return lista;
         }
-        public List<FiltrarLaboratorioCLS> FiltrarLaboratorio(int idLaboratorio ,string nombre, string direccion, string personacontacto)
+        public List<FiltrarLaboratorioCLS> FiltrarLaboratorio(string nombre, string direccion, string personacontacto)
         {
             List<FiltrarLaboratorioCLS> lista = null;
 
@@ -60,7 +60,6 @@ namespace CapaDatos
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         // Aseguramos que los parámetros sean del tipo correcto
-                        cmd.Parameters.Add("@idlaboratorio", System.Data.SqlDbType.Int).Value = idLaboratorio;
                         cmd.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar, 100).Value = nombre ?? "";
                         cmd.Parameters.Add("@direccion", System.Data.SqlDbType.VarChar, 100).Value = direccion ?? "";
                         cmd.Parameters.Add("@personacontacto", System.Data.SqlDbType.VarChar, 100).Value = personacontacto ?? "";
@@ -74,10 +73,9 @@ namespace CapaDatos
                             while (dr.Read())
                             {
                                 medCLS = new FiltrarLaboratorioCLS();
-                                medCLS.idLaboratorio = dr.GetInt32(0);
-                                medCLS.nombre = dr.GetString(1);
-                                medCLS.direccion = dr.GetString(2);
-                                medCLS.personacontacto = dr.GetString(3);
+                                medCLS.nombre = dr.GetString(0);
+                                medCLS.direccion = dr.GetString(1);
+                                medCLS.personacontacto = dr.GetString(2);
                                 lista.Add(medCLS);
                             }
                         }

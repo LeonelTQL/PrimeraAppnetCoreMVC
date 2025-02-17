@@ -31,11 +31,13 @@ namespace PrimeraAppnetCoreMVC.Controllers
             return cadenaDato;
         }
 
-        public List<FiltrarLaboratorioCLS> filtrarLabotatorio(int idLaboratorio, string nombre, string direccion, string personacontacto)
+        public List<FiltrarLaboratorioCLS> filtrarLaboratorio(string nombre, string direccion, string personacontacto)
+
         {
             LaboratorioDAL obj = new LaboratorioDAL();
-            return obj.FiltrarLaboratorio(idLaboratorio, nombre, direccion, personacontacto);
+            return obj.FiltrarLaboratorio(nombre, direccion, personacontacto);
         }
+
 
 
     }

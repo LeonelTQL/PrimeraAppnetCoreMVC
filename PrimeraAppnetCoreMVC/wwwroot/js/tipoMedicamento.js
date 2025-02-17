@@ -2,19 +2,14 @@
     listarTipoMedicamento();
 };
 
+let objTipoMedicamento;
 async function listarTipoMedicamento() {
-    pintar({
+    objTipoMedicamento = {
         url: "TipoMedicamento/listarTipoMedicamento",
-        cabeceras: ["Id Tipo Medicamento", "Nombre Medicamento", "Descripción"],
-        propiedades: ["idMedicamento", "nombre", "descripcion"],
-        transform: function (item) {
-            return {
-                idMedicamento: item.idMedicamento || "",
-                nombre: item.nombre || "",
-                descripcion: item.descripcion || ""
-            };
-        }
-    });
+        cabeceras: ["ID Tipo de Medicamento", "Nombre", "Descripción"],
+        propiedades: ["idMedicamento", "nombre", "descripcion"]
+    };
+    pintar(objTipoMedicamento);
 }
 
 async function eliminarMed() {
@@ -36,13 +31,25 @@ async function filtrarMedicamento() {
     });
 }
 
-function filtrarTipoMedicamento() {
-    let descripcion = document.getElementById("txtDescripcion").value;
-    pintar({
-        url: "TipoMedicamento/FiltrarTipoMedicamento?descripcion=" + descripcion,
-        cabeceras: ["Id Tipo Medicamento", "Nombre Medicamento", "Descripción"],
-        propiedades: ["idMedicamento", "nombre", "descripcion"],
-    });
+//function filtrarTipoMedicamento() {
+//    let descripcion = document.getElementById("txtDescripcion").value;
+//    objTipoMedicamento.url = "TipoMedicamento/FiltrarTipoMedicamento?descripcion=" + descripcion;
+//    pintar(objTipoMedicamento);
+//}
+
+//function LimpiarControl() {
+//    listarTipoMedicamento();
+//    set("txtDescripcion", "");
+//}
+
+function filtarTipoMedicamento() {
+    let descripcion = get("txtDescripcion");
+    if (descripcion == "") {
+        listarTipoMedicamento();
+    } else {
+        objTipoMedicamento.url = "TipoMedicamento/FiltrarTipoMedicamento?descripcion=" + descripcion;
+        pintar(objTipoMedicamento);
+    }
 }
 
 

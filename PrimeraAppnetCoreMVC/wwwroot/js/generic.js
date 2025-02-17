@@ -4,6 +4,10 @@ function get(valor) {
    return document.getElementById(valor).value;
 }
 
+function set(idControl, valor) {
+    document.getElementById(idControl).value = valor;
+}
+
 async function fetchGet(url, tiporespuesta, callback) {
     try {
         let raiz = document.getElementById("hdfOculto").value;
@@ -27,6 +31,32 @@ async function fetchGet(url, tiporespuesta, callback) {
 
 let objconfigurationGlobal;
 
+
+function fetchpost(url, tiporespuesta, frm, callback) {
+    try {
+        let raiz = document.getElementById("hdfOculto").value;
+        let urlCompleta = window.location.protocol + "//" + window.location.host + "/" + raiz + url;
+
+        let res = await fetch(urlCompleta, {
+            method: "POST",
+            body: frm,
+
+        });
+
+        if (tiporespuesta === "json") {
+            data = await res.json();
+        } else if (tiporespuesta === "text") {
+            data = await res.text();
+        } else {
+            data = res;
+        }
+
+        callback(res);
+
+    } catch(e) {
+        alert("Ocurrio un problema en post: " + e.message);
+    }
+}
 function pintar(objConfiguration) {
     objconfigurationGlobal = objConfiguration;
     fetchGet(objConfiguration.url, "json", function (res) {

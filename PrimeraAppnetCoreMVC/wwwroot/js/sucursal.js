@@ -35,16 +35,26 @@ async function recuperarSucursales() {
     });
 }
 
-function filtrarSucurcales() {
+//function filtrarSucurcales() {
+//    let nombresucursal = get("txtSucursalNombre");
+//    objSucursal.url = "Sucursal/FiltrarSucursal?nombre=" + nombresucursal;
+//    pintar(objSucursal);
+//}
+
+//function LimpiarControl() {
+//    listarSucursales();
+//    set("txtSucursalNombre", "");
+//}
+
+
+function filtarSucursal() {
     let nombresucursal = get("txtSucursalNombre");
-    objSucursal.url = "Sucursal/FiltrarSucursal?nombre=" + nombresucursal;
-    pintar(objSucursal);
+    if (nombresucursal == "") {
+        listarSucursales();
+    } else {
+        objSucursal.url = "Sucursal/FiltrarSucursal?nombre=" + nombresucursal;
+        pintar(objSucursal);
+    }
 }
-
-function LimpiarControl() {
-    listarSucursales();
-    document.getElementById("txtSucursalNombre").value = "";
-}
-
 
 
