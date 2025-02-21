@@ -7,7 +7,9 @@ async function listarTipoMedicamento() {
     objTipoMedicamento = {
         url: "TipoMedicamento/listarTipoMedicamento",
         cabeceras: ["ID Tipo de Medicamento", "Nombre", "Descripción"],
-        propiedades: ["idMedicamento", "nombre", "descripcion"]
+        propiedades: ["idMedicamento", "nombre", "descripcion"],
+        editar: true,
+        eliminar: true
     };
     pintar(objTipoMedicamento);
 }
@@ -31,17 +33,6 @@ async function filtrarMedicamento() {
     });
 }
 
-//function filtrarTipoMedicamento() {
-//    let descripcion = document.getElementById("txtDescripcion").value;
-//    objTipoMedicamento.url = "TipoMedicamento/FiltrarTipoMedicamento?descripcion=" + descripcion;
-//    pintar(objTipoMedicamento);
-//}
-
-//function LimpiarControl() {
-//    listarTipoMedicamento();
-//    set("txtDescripcion", "");
-//}
-
 function filtarTipoMedicamento() {
     let descripcion = get("txtDescripcion");
     if (descripcion == "") {
@@ -51,71 +42,16 @@ function filtarTipoMedicamento() {
         pintar(objTipoMedicamento);
     }
 }
+function guardarTipoMedicamento() {
+    let frmGuardar = document.getElementById("frmGuardarTipoMedicamento");
 
-
-    //fetchGet("TipoMedicamento/listarTipoMedicamento", "json", function (res) {
-    //    let nroRegistros = res.length;
-    //    alert(nroRegistros);
-        /*
-            [
-              {
-                "idMedicamento": 1,
-                "nombre": "Analgésico",
-                "descripcion": "Desc 1"
-              },
-              {
-                "idMedicamento": 2,
-                "nombre": "Cannabis",
-                "descripcion": "Desc 1"
-              },
-              {
-                "idMedicamento": 3,
-                "nombre": "Vitamina",
-                "descripcion": "Desc 1"
-              }
-            ]
-        */
-    //    let contenido = "";
-    //    contenido += "<table class ='table'>";
-    //    contenido += "<thead>";
-
-    //    //primera fila con los headers
-    //    contenido += "<tr>";
-    //    contenido += "<td>Id Tipo Medicamento</td>";
-    //    contenido += "<td>Nombre Medicamento</td>";
-    //    contenido += "<td>Descripcion Medicamento</td>";
-    //    contenido += "</tr >";
-
-    //    contenido += "</thead>";
-
-    //    contenido += "<tbody>"
-        
-    //    for (let i = 0; i < nroRegistros; i++) {
-    //        obj = res[i]
-    //        contenido += "<tr>";
-    //        contenido += "<td>" + obj.idMedicamento + "</td>";
-    //        contenido += "<td>" + obj.nombre + "</td>";
-    //        contenido += "<td>" + obj.descripcion + "</td>";
-    //        contenido += "</tr>";
-    //    }
-
-    //    contenido += "</tbody >"
-    //    contenido += "</table>";
-
-    //    document.getElementById("divtabla").innerHTML = contenido;
-    //});
-    //try {
-    //    let raiz = document.getElementById("hdfOculto").value;
-
-    //    //http://localhost....
-    //    let urlCompleta = window.location.protocol + "//" + window.location.host + "/" + raiz + "TipoMedicamento/listarTipoMedicamento";
-    //    let res = await fetch(urlCompleta);
-    //    res = await res.json();
-
-    //    //Json
-
-    //    alert(res);
-    //    alert(JSON.stringify(res));
-    //} catch(e) {
-    //    alert("algo salio mal");
-    //}
+    let frm = new FormData(frmGuardar);
+    fetchpost("TipoMedicamento/guardarTipoMedicamento", "text", frm, function (res) {
+        if (res == "1") {
+            listarTipoMedicamento();
+            LimpiarDatos("frmGuardarTipoMedicamento");
+        } else {
+            alert("Ocurrio un error al guardar el tipo de medicamento");
+        }
+    });
+}

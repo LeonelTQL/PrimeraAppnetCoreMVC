@@ -58,5 +58,11 @@ namespace PrimeraAppnetCoreMVC.Controllers
             List<TipoMedicamentoCLS> lista = obj.filtrarTipoMedicamento(descripcion);
             return lista;
         }
+
+        public int guardarTipoMedicamento(TipoMedicamentoCLS oTipoMedicamentoCLS)
+        {
+           TipoMedicamentoBL obj = new TipoMedicamentoBL();
+           return obj.guardarTipoMedicamento(oTipoMedicamentoCLS);
+        }
     }   
 }

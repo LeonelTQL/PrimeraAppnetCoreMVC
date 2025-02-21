@@ -18,26 +18,62 @@
 <button type="button" onclick="recuperarSucursales()" class="btn btn-primary">Recuperar</button>
 
 
-<div class="card mb-4">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" class="form-control" onkeyup="filtarSucursal()" id="txtSucursalNombre">
+<form id="frmBusquedaSucursal" method="post">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="txtSucursalNombre" name="nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Direccion:</label>
+                        <input type="text" class="form-control" id="txtSucursalDireccion" name="direccion">
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <button type="button" onclick="filtrarSucursal()" class="btn btn-primary">
+                        Filtrar
+                    </button>
+                    <button type="button" onclick="LimpiarSucursal()" class="btn btn-primary">
+                        Limpiar
+                    </button>
                 </div>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col-12">
-                <button onclick="filtrarSucurcales()" class="btn btn-primary">
-                    Filtrar
-                </button>
-                <button onclick="LimpiarControl()" class="btn btn-primary">
-                    Limpiar
-                </button>
+    </div>
+</form>
+
+<form id="frmGuardarSucursal" method="post">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="txtnombre" name="nombre">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="direccion">Direccion:</label>
+                        <input type="text" class="form-control" id="txtdireccion" name="direccion">
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class=" d-grid gap-1">
+                        <button type="button" onclick="guardarSucursal()" class="btn btn-primary">
+                            Guardar
+                        </button>
+                        <button type="button" onclick="LimpiarSucursalG()" class="btn btn-danger">
+                            Limpiar
+                        </button>
+                    </div>
+                    </di>
+                </div>
             </div>
         </div>
-        
-    </div>
-</div>
+</form>

@@ -30,5 +30,11 @@ namespace CapaNegocio
             TipoMedicamentoDAL obj = new TipoMedicamentoDAL();
             return obj.filtrarTipoMedicamento(descripcion);
         }
+
+        public int guardarTipoMedicamento(TipoMedicamentoCLS obj)
+        {
+            TipoMedicamentoDAL oTipoMedicamentoDAL = new TipoMedicamentoDAL();
+            return oTipoMedicamentoDAL.guardarTipoMedicamento(obj);
+        }
     }
 }

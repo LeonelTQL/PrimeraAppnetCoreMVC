@@ -46,9 +46,9 @@ namespace CapaDatos
             }
             return lista;
         }
-        public List<FiltrarLaboratorioCLS> FiltrarLaboratorio(string nombre, string direccion, string personacontacto)
+        public List<listarLaboratorioCLS> FiltrarLaboratorio(listarLaboratorioCLS obj)
         {
-            List<FiltrarLaboratorioCLS> lista = null;
+            List<listarLaboratorioCLS> lista = null;
 
 
             using (SqlConnection cn = new SqlConnection(cadenaDato))
@@ -59,24 +59,31 @@ namespace CapaDatos
                     using (SqlCommand cmd = new SqlCommand("uspFiltrarLaboratorio", cn))
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        // Aseguramos que los parámetros sean del tipo correcto
-                        cmd.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar, 100).Value = nombre ?? "";
-                        cmd.Parameters.Add("@direccion", System.Data.SqlDbType.VarChar, 100).Value = direccion ?? "";
-                        cmd.Parameters.Add("@personacontacto", System.Data.SqlDbType.VarChar, 100).Value = personacontacto ?? "";
+              
+                        cmd.Parameters.AddWithValue("@nombre", obj.nombre == null ? "": obj.nombre);
+                        cmd.Parameters.AddWithValue("@direccion", obj.direccion == null ? "" : obj.direccion);
+                        cmd.Parameters.AddWithValue("@personacontacto", obj.personacontacto == null ? "" : obj.personacontacto);
 
 
                         SqlDataReader dr = cmd.ExecuteReader();
                         if (dr != null)
                         {
-                            FiltrarLaboratorioCLS medCLS;
-                            lista = new List<FiltrarLaboratorioCLS>();
+                            listarLaboratorioCLS olaboratorioCLS;
+                            lista = new List<listarLaboratorioCLS>();
+
+                            int posId = dr.GetOrdinal("IIDLABORATORIO");
+                            int posNombre = dr.GetOrdinal("NOMBRE");
+                            int posDireccion = dr.GetOrdinal("DIRECCION");
+                            int posPersonaContacto = dr.GetOrdinal("PERSONACONTACTO");
+
                             while (dr.Read())
                             {
-                                medCLS = new FiltrarLaboratorioCLS();
-                                medCLS.nombre = dr.GetString(0);
-                                medCLS.direccion = dr.GetString(1);
-                                medCLS.personacontacto = dr.GetString(2);
-                                lista.Add(medCLS);
+                                olaboratorioCLS = new listarLaboratorioCLS();
+                                olaboratorioCLS.idLaboratorio = dr.IsDBNull(posId)? 0: dr.GetInt32(0);
+                                olaboratorioCLS.nombre = dr.IsDBNull(posNombre) ? "" : dr.GetString(1);
+                                olaboratorioCLS.direccion = dr.IsDBNull(posDireccion) ? "" : dr.GetString(2);
+                                olaboratorioCLS.personacontacto = dr.IsDBNull(posPersonaContacto) ? "" : dr.GetString(3);
+                                lista.Add(olaboratorioCLS);
                             }
                         }
                     }

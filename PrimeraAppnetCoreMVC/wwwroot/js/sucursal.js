@@ -8,7 +8,9 @@ async function listarSucursales() {
     {
         url: "Sucursal/listarSucursales",
         cabeceras: ["ID Sucursal", "Nombre ", "Direccion"],
-        propiedades: ["idsucursal", "nombre", "direccion"]
+        propiedades: ["idsucursal", "nombre", "direccion"],
+        editar: true,
+        eliminar: true
     }
     pintar(objSucursal);
 }
@@ -35,26 +37,34 @@ async function recuperarSucursales() {
     });
 }
 
-//function filtrarSucurcales() {
-//    let nombresucursal = get("txtSucursalNombre");
-//    objSucursal.url = "Sucursal/FiltrarSucursal?nombre=" + nombresucursal;
-//    pintar(objSucursal);
-//}
-
-//function LimpiarControl() {
-//    listarSucursales();
-//    set("txtSucursalNombre", "");
-//}
-
-
-function filtarSucursal() {
-    let nombresucursal = get("txtSucursalNombre");
-    if (nombresucursal == "") {
-        listarSucursales();
-    } else {
-        objSucursal.url = "Sucursal/FiltrarSucursal?nombre=" + nombresucursal;
-        pintar(objSucursal);
-    }
+function filtrarSucursal() {
+    let forma = document.getElementById("frmBusquedaSucursal");
+    let frm = new FormData(forma);
+    fetchpost("Sucursal/FiltrarSucursal", "json", frm, function (data) {
+        document.getElementById("divContenedorTabla").innerHTML = generarTabla(data);
+    });
 }
 
 
+
+function LimpiarSucursal() {
+    LimpiarDatos("frmBusquedaSucursal");
+    listarSucursales();
+}
+
+
+function guardarSucursal() {
+    let forma = document.getElementById("frmGuardarSucursal");
+    let frm = new FormData(forma);
+    fetchpost("Sucursal/GuardarSucursal", "text", frm, function (res) {
+        if (res === "1") {
+            listarSucursales();
+            
+        }
+    });
+}
+
+function LimpiarSucursalG() {
+    LimpiarDatos("frmGuardarSucursal");
+    listarSucursales();
+}

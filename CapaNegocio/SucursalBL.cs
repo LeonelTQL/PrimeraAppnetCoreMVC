@@ -17,12 +17,16 @@ namespace CapaNegocio
             return obj.recuperarSucursal(idSucursal);
         }
 
-        public List<SucursalCLS> filtrarSucursal(string nombre)
+        public List<SucursalCLS> filtrarSucursal(SucursalCLS objSucursal)
         {
             SucursalDAL obj = new SucursalDAL();
-            return obj.filtrarSucursal(nombre);
+            return obj.filtrarSucursal(objSucursal);
         }
 
-
+        public int guardarSucursal(SucursalCLS obj)
+        {
+            SucursalDAL oTipoMedicamentoDAL = new SucursalDAL();
+            return oTipoMedicamentoDAL.guardarSucursal(obj);
+        }
     }
 }

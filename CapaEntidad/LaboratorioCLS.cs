@@ -16,12 +16,5 @@ namespace CapaEntidad
             public string personacontacto { get; set; }
 
         }
-        public class FiltrarLaboratorioCLS
-        {
-            public string nombre { get; set; }
-            public string direccion { get; set; }
-            public string personacontacto { get; set; }
-
-        }
     }
 }

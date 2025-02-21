@@ -76,3 +76,33 @@
     </div>
 </div>
 
+<form id="frmGuardarTipoMedicamento" method="post">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="txtnombre" name="nombre">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion:</label>
+                        <input type="text" class="form-control" id="txtdescripcion" name="descripcion">
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class=" d-grid gap-1">
+                        <button type="button" onclick="guardarTipoMedicamento()" class="btn btn-primary">
+                            Guardar
+                        </button>
+                        <button type="button" onclick="LimpiarTipoMedicamento()" class="btn btn-danger">
+                            Limpiar
+                        </button>
+                    </div>
+                    </di>
+                </div>
+            </div>
+        </div>
+</form>

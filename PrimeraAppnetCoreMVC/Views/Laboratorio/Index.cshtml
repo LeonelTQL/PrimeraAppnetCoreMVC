@@ -15,27 +15,27 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
-                    <input type="text" class="form-control" onkeyup="filtarLaboratorio()" id="txtnombre">
+                        <input type="text" class="form-control" id="txtnombre" name="nombre">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="direccion">Direccion:</label>
-                    <input type="text" class="form-control" onkeyup="filtarLaboratorio()" id="txtdireccion">
+                        <input type="text" class="form-control" id="txtdireccion" name="direccion">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="personacontacto">Persona de contacto:</label>
-                    <input type="text" class="form-control" onkeyup="filtarLaboratorio()" id="txtpersonacontacto">
+                        <input type="text" class="form-control" id="txtpersonacontacto" name="personacontacto">
                 </div>
             </div>
             <div class="row g-3"> 
                 <div class=" d-grid gap-1">
-                        <button onclick="buscarLaboratorio()" class="btn btn-primary">
+                        <button type="button" onclick="buscarLaboratorio()" class="btn btn-primary">
                         Buscar
                     </button>
-                        <button onclick="" class="btn btn-danger">
+                        <button type="button" onclick="LimpiarLaboratorio()" class="btn btn-danger">
                         Limpiar
                     </button>
                 </div>

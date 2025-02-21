@@ -161,28 +161,30 @@ namespace CapaDatos
             return lista;
         }
 
-        //public List<TipoMedicamentoCLS> listarTipoMedicamento()
-        //{
-        //    List<TipoMedicamentoCLS> lista = new List<TipoMedicamentoCLS>();
-        //    lista.Add(new TipoMedicamentoCLS
-        //    {
-        //        idMedicamento = 1,
-        //        nombre = "Analgésico",
-        //        descripcion = "Desc 1"
-        //    });
-        //    lista.Add(new TipoMedicamentoCLS
-        //    {
-        //        idMedicamento = 2,
-        //        nombre = "Cannabis",
-        //        descripcion = "Desc 1"
-        //    });
-        //    lista.Add(new TipoMedicamentoCLS
-        //    {
-        //        idMedicamento = 3,
-        //        nombre = "Vitamina",
-        //        descripcion = "Desc 1"
-        //    });
-        //    return lista;
-        //}
+
+        public int guardarTipoMedicamento(TipoMedicamentoCLS oTipoMedicamentoCLS)
+        {
+            int rpta = 0;
+
+            using (SqlConnection cn = new SqlConnection(cadenaDato))
+            {
+                cn.Open();
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand("SELECT IIDTIPOMEDICAMENTO, NOMBRE,DESCRIPCION FROM TipoMedicamento WHERE BHABILITADO =1", cn))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@nombre", oTipoMedicamentoCLS.nombre);
+                        cmd.Parameters.AddWithValue("@descripcion", oTipoMedicamentoCLS.descripcion);
+                        rpta = cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception)
+                {
+                    cn.Close();
+                }
+            }
+            return rpta;
+        }
     }
 }

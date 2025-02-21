@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using static CapaEntidad.LaboratorioCLS;
 
 namespace CapaDatos
 {
@@ -85,7 +86,7 @@ namespace CapaDatos
             return lista;
         }
 
-        public List<SucursalCLS> filtrarSucursal(string nombre)
+        public List<SucursalCLS> filtrarSucursal(SucursalCLS obj)
         {
             List<SucursalCLS> lista = new List<SucursalCLS>();
 
@@ -98,21 +99,29 @@ namespace CapaDatos
                     using (SqlCommand cmd = new SqlCommand("uspFiltrarSucursal", cn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@nombresucursal", nombre ?? "");
+                        cmd.Parameters.AddWithValue("@nombresucursal", obj.nombre == null ? "" : obj.nombre);
+                        cmd.Parameters.AddWithValue("@direccion", obj.direccion == null ? "" : obj.direccion);
 
                         SqlDataReader drd = cmd.ExecuteReader();
 
                         if (drd != null)
                         {
+
+                            SucursalCLS oSucursalCLS;
+                            lista = new List<SucursalCLS>();
+
+                            int posId = drd.GetOrdinal("IIDSUCURSAL");
+                            int posNombre = drd.GetOrdinal("NOMBRE");
+                            int posDireccion = drd.GetOrdinal("DIRECCION");
+
                             while (drd.Read())
                             {
-                                SucursalCLS oSucursal = new SucursalCLS()
-                                {
-                                    idsucursal = drd.GetInt32(0),
-                                    nombre = drd.GetString(1),
-                                    direccion = drd.GetString(2)
-                                };
-                                lista.Add(oSucursal);
+
+                                oSucursalCLS = new SucursalCLS();
+                                oSucursalCLS.idsucursal = drd.IsDBNull(posId) ? 0 : drd.GetInt32(0);
+                                oSucursalCLS.nombre = drd.IsDBNull(posNombre) ? "" : drd.GetString(1);
+                                oSucursalCLS.direccion = drd.IsDBNull(posDireccion) ? "" : drd.GetString(2);
+                                lista.Add(oSucursalCLS);
                             }
                         }
                     }
@@ -124,5 +133,32 @@ namespace CapaDatos
             }
             return lista;
         }
+
+        public int guardarSucursal(SucursalCLS oSucursalCLS)
+        {
+            int rpta = 0;
+
+            using (SqlConnection cn = new SqlConnection(cadenaDato))
+            {
+                cn.Open();
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO Sucursal (NOMBRE, DIRECCION,BHABILITADO) VALUES (@nombre, @direccion,1)", cn))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@nombre", oSucursalCLS.nombre);
+                        cmd.Parameters.AddWithValue("@direccion", oSucursalCLS.direccion);
+
+                        rpta = cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+            }
+            return rpta;
+        }
+
     }
 }

@@ -22,20 +22,12 @@ namespace PrimeraAppnetCoreMVC.Controllers
             return obj.listarLaboratorio();
         }
 
-        public string cadena()
-        {
-            IConfigurationBuilder builder = new ConfigurationBuilder();
-            builder.AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json"));
-            var root = builder.Build();
-            var cadenaDato = root.GetConnectionString("cn");
-            return cadenaDato;
-        }
 
-        public List<FiltrarLaboratorioCLS> filtrarLaboratorio(string nombre, string direccion, string personacontacto)
+        public List<listarLaboratorioCLS> filtrarLaboratorio(listarLaboratorioCLS objLaboratorio)
 
         {
-            LaboratorioDAL obj = new LaboratorioDAL();
-            return obj.FiltrarLaboratorio(nombre, direccion, personacontacto);
+            LaboratorioBL obj = new LaboratorioBL();
+            return obj.filtrarLaboratorio(objLaboratorio);
         }
 
 

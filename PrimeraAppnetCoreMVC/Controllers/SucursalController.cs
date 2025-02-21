@@ -47,13 +47,19 @@ namespace PrimeraAppnetCoreMVC.Controllers
             return lista;
         }
 
-        public List<SucursalCLS> FiltrarSucursal(string nombre)
+        public List<SucursalCLS> FiltrarSucursal(SucursalCLS objSucursal)
         {
+
             SucursalBL obj = new SucursalBL();
-            List<SucursalCLS> lista = obj.filtrarSucursal(nombre);
+            List<SucursalCLS> lista = obj.filtrarSucursal(objSucursal);
             return lista;
         }
 
+        public int GuardarSucursal(SucursalCLS obj)
+        {
+            SucursalBL oSucursal = new SucursalBL();
+            return oSucursal.guardarSucursal(obj);
+        }
 
     }
 }
