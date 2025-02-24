@@ -45,53 +45,7 @@ namespace CapaDatos
             return lista;
         }
 
-        //public List<FiltrarMedicamentoCLS> FiltrarMedicamento(int idMed, string nombre, int idLab, int idTip)
-        //{
-        //    List<FiltrarMedicamentoCLS> lista = null;
-        //    IConfigurationBuilder cfg = new ConfigurationBuilder();
-        //    cfg.AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json"));
-        //    var root = cfg.Build();
-        //    var cadenaDato = root.GetConnectionString("cn");
-
-        //    using (SqlConnection cn = new SqlConnection(cadenaDato))
-        //    {
-        //        try
-        //        {
-        //            cn.Open();
-        //            using (SqlCommand cmd = new SqlCommand("uspFiltrarMedicamento", cn))
-        //            {
-        //                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-        //                // Aseguramos que los parámetros sean del tipo correcto
-        //                cmd.Parameters.Add("@idmedicamento", System.Data.SqlDbType.Int).Value = idMed;
-        //                cmd.Parameters.Add("@nombre", System.Data.SqlDbType.VarChar, 100).Value = nombre ?? "";
-        //                cmd.Parameters.Add("@idlaboratorio", System.Data.SqlDbType.Int).Value = idLab;
-        //                cmd.Parameters.Add("@idtipomedicamento", System.Data.SqlDbType.Int).Value = idTip;
-
-        //                SqlDataReader dr = cmd.ExecuteReader();
-        //                if (dr != null)
-        //                {
-        //                    FiltrarMedicamentoCLS medCLS;
-        //                    lista = new List<FiltrarMedicamentoCLS>();
-        //                    while (dr.Read())
-        //                    {
-        //                        medCLS = new FiltrarMedicamentoCLS();
-        //                        medCLS.idMedicamento = dr.GetInt32(0);
-        //                        medCLS.nombre = dr.GetString(1);
-        //                        medCLS.idLaboratorio = dr.IsDBNull(1) ? "" : dr.GetString(2);
-        //                        medCLS.idTipoMedicamento = dr.GetString(3);
-        //                        lista.Add(medCLS);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            throw new Exception("Error al filtrar medicamentos: " + ex.Message);
-        //        }
-        //    }
-        //    return lista;
-        //}
-
+      
         public void EliminarMedicamento(int id)
         {
             IConfigurationBuilder cfg = new ConfigurationBuilder();
@@ -182,6 +136,78 @@ namespace CapaDatos
                     using (SqlCommand cmd = new SqlCommand("INSERT INTO TipoMedicamento(NOMBRE,DESCRIPCION,BHABILITADO) VALUES (@nombre, @descripcion,1)", cn))
                     {
                         cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@nombre", oTipoMedicamentoCLS.nombre);
+                        cmd.Parameters.AddWithValue("@descripcion", oTipoMedicamentoCLS.descripcion);
+                        rpta = cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception)
+                {
+                    cn.Close();
+                }
+            }
+            return rpta;
+        }
+
+
+        public TipoMedicamentoCLS recuperarTipoMedicamento(int idMedicamento)
+        {
+            TipoMedicamentoCLS oTipoMedicamentoCLS = null;
+
+
+            using (SqlConnection cn = new SqlConnection(cadenaDato))
+            {
+                cn.Open();
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand("SELECT IIDTIPOMEDICAMENTO as idMedicamento, NOMBRE, DESCRIPCION " +
+     "FROM TipoMedicamento WHERE BHABILITADO = 1 AND IIDTIPOMEDICAMENTO = @iidtipomedicamento", cn))
+
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@iidtipomedicamento", idMedicamento);
+
+                        SqlDataReader drd = cmd.ExecuteReader();
+
+                        if (drd != null)
+                        {
+
+
+                            while (drd.Read())
+                            {
+                                oTipoMedicamentoCLS = new TipoMedicamentoCLS();
+                                oTipoMedicamentoCLS.idMedicamento = drd.IsDBNull(0) ? 0 : drd.GetInt32(0);
+                                oTipoMedicamentoCLS.nombre = drd.IsDBNull(1) ? "" : drd.GetString(1);
+                                oTipoMedicamentoCLS.descripcion = drd.IsDBNull(2) ? "" : drd.GetString(2);
+
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    cn.Close();
+                    oTipoMedicamentoCLS = null;
+
+                }
+            }
+            return oTipoMedicamentoCLS;
+        }
+
+
+        public int editarTipoMedicamento(TipoMedicamentoCLS oTipoMedicamentoCLS)
+        {
+            int rpta = 0;
+
+            using (SqlConnection cn = new SqlConnection(cadenaDato))
+            {
+                cn.Open();
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand("UPDATE TipoMedicamento SET NOMBRE = @nombre, DESCRIPCION = @descripcion WHERE IIDTIPOMEDICAMENTO = @iidtipomedicamento", cn))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@iidtipomedicamento", oTipoMedicamentoCLS.idMedicamento);
                         cmd.Parameters.AddWithValue("@nombre", oTipoMedicamentoCLS.nombre);
                         cmd.Parameters.AddWithValue("@descripcion", oTipoMedicamentoCLS.descripcion);
                         rpta = cmd.ExecuteNonQuery();

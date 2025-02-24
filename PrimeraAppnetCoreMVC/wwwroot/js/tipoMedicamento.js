@@ -9,7 +9,8 @@ async function listarTipoMedicamento() {
         cabeceras: ["ID Tipo de Medicamento", "Nombre", "Descripción"],
         propiedades: ["idMedicamento", "nombre", "descripcion"],
         editar: true,
-        eliminar: true
+        eliminar: true,
+        propiedadId: "idMedicamento"
     };
     pintar(objTipoMedicamento);
 }
@@ -31,11 +32,15 @@ function filtrarTipoMedicamento() {
 }
 function guardarTipoMedicamento() {
     let frmGuardar = document.getElementById("frmGuardarTipoMedicamento");
-
     let frm = new FormData(frmGuardar);
-    fetchpost("TipoMedicamento/guardarTipoMedicamento", "text", frm, function (res) {
+    let idMedicamento = document.getElementById("txtidMedicamento").value;
+
+    let url = idMedicamento ? "TipoMedicamento/editarTipoMedicamento" : "TipoMedicamento/guardarTipoMedicamento";
+
+    fetchpost(url, "text", frm, function (res) {
         if (res == "1") {
             listarTipoMedicamento();
+            LimpiarTipoMedicamento();
         }
     });
 }
@@ -47,4 +52,8 @@ function LimpiarTipoMedicamento(){
 function LimpiarTipoMedicamentoB() {
     LimpiarDatos("frmBusquedaTipoMedicamento");
     listarTipoMedicamento();
+}
+
+function Editar(id) {
+    recuperar("TipoMedicamento/recuperarTipoMedicamento?idTipoMedicamento=" + id, "frmGuardarTipoMedicamento");
 }

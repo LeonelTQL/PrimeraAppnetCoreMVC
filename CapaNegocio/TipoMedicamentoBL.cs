@@ -19,11 +19,7 @@ namespace CapaNegocio
         }
 
 
-        //public List<FiltrarMedicamentoCLS> filtrarMedicamento(int idMed, string nombre, int idLab, int idTip)
-        //{
-        //    TipoMedicamentoDAL obj = new TipoMedicamentoDAL();
-        //    return obj.FiltrarMedicamento(idMed, nombre, idLab, idTip);
-        //}
+
 
         public List<TipoMedicamentoCLS> filtrarTipoMedicamento(TipoMedicamentoCLS obj)
         {
@@ -35,6 +31,18 @@ namespace CapaNegocio
         {
             TipoMedicamentoDAL oTipoMedicamentoDAL = new TipoMedicamentoDAL();
             return oTipoMedicamentoDAL.guardarTipoMedicamento(obj);
+        }
+
+        public TipoMedicamentoCLS recuperarTipoMedicamento(int obj)
+        {
+            TipoMedicamentoDAL oTipoMedicamentoDAL = new TipoMedicamentoDAL();
+            return oTipoMedicamentoDAL.recuperarTipoMedicamento(obj);
+        }
+
+        public int editarTipoMedicamento(TipoMedicamentoCLS obj)
+        {
+            TipoMedicamentoDAL oTipoMedicamentoDAL = new TipoMedicamentoDAL();
+            return oTipoMedicamentoDAL.editarTipoMedicamento(obj);
         }
     }
 }

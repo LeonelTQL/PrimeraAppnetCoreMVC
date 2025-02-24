@@ -15,13 +15,13 @@ namespace PrimeraAppnetCoreMVC.Controllers
         }
 
 
-        public IActionResult Inicio() 
+        public IActionResult Inicio()
         {
             return View();
         }
         public IActionResult SinMenu()
         {
-                return View();
+            return View();
         }
 
         public List<TipoMedicamentoCLS> listarTipoMedicamento()
@@ -56,8 +56,20 @@ namespace PrimeraAppnetCoreMVC.Controllers
 
         public int guardarTipoMedicamento(TipoMedicamentoCLS oTipoMedicamentoCLS)
         {
-           TipoMedicamentoBL obj = new TipoMedicamentoBL();
-           return obj.guardarTipoMedicamento(oTipoMedicamentoCLS);
+            TipoMedicamentoBL obj = new TipoMedicamentoBL();
+            return obj.guardarTipoMedicamento(oTipoMedicamentoCLS);
+        }
+
+        public TipoMedicamentoCLS recuperarTipoMedicamento(int idTipoMedicamento) 
+        {
+            TipoMedicamentoBL obj = new TipoMedicamentoBL();
+            return obj.recuperarTipoMedicamento(idTipoMedicamento);
+        }
+
+        public int editarTipoMedicamento(TipoMedicamentoCLS oTipoMedicamentoCLS)
+        {
+            TipoMedicamentoBL obj = new TipoMedicamentoBL();
+            return obj.editarTipoMedicamento(oTipoMedicamentoCLS);
         }
     }   
 }
