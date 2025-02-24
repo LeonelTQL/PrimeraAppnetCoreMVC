@@ -7,3 +7,82 @@
 
 <script src="~/js/generic.js"></script>
 <script src="~/js/medicamento.js"></script>
+
+<form id="frmBusquedaMedicamento" method="post">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="medicamento">Medicamento:</label>
+                        <input type="text" class="form-control" id="txtNombreMedicamento" name="NOMBREMEDICAMENTO">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="laboratorio">Laboratorio:</label>
+                        <input type="text" class="form-control" id="txtNombreLaboratorio" name="IIDLABORATORIO">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="tipoMedicamento">Tipo Medicamento:</label>
+                        <input type="text" class="form-control" id="txtNombreTipoMedicamento" name="IIDTIPOMEDICAMENTO">
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class=" d-grid gap-1">
+                        <button type="button" onclick="filtrarMedicamento()" class="btn btn-primary">
+                            Filtrar
+                        </button>
+                        <button type="button" onclick="LimpiarMedicamento()" class="btn btn-danger">
+                            Limpiar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+<form id="frmGuardarMedicamento" method="post">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="medicamento">Medicamento:</label>
+                        <input type="text" class="form-control" id="txtNombreMedicamento" name="NOMBREMEDICAMENTO">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="laboratorio">Laboratorio:</label>
+                        <input type="text" class="form-control" id="txtNombreLaboratorio" name="IIDLABORATORIO">
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="tipoMedicamento">Tipo Medicamento:</label>
+                        <input type="text" class="form-control" id="txtNombreTipoMedicamento" name="IIDTIPOMEDICAMENTO">
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class=" d-grid gap-1">
+                        <button type="button" onclick="guardarMedicamento()" class="btn btn-primary">
+                            Guardar
+                        </button>
+                        <button type="button" onclick="LimpiarMedicamentoG()" class="btn btn-danger">
+                            Limpiar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+
+
+<div id="divtabla"></div>

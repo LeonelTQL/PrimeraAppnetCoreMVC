@@ -20,27 +20,14 @@ async function eliminarMed() {
     alert(id);
 }
 
-async function filtrarMedicamento() {
-    let id = document.getElementById("idMed").value;
-    let nombre = document.getElementById("nombre").value;
-    let idLab = document.getElementById("idLab").value;
-    let idTip = document.getElementById("idTip").value;
 
-    pintar({
-        url: "TipoMedicamento/filtrarMedicamento?idMed=" + id + "&nombre=" + nombre + "&idLab=" + idLab + "&idTip=" + idTip,
-        cabeceras: ["ID Medicamento", "Nombre", "ID Laboratorio", "ID Tipo Medicamento"],
-        propiedades: ["idMedicamento", "nombre", "idLaboratorio", "idTipoMedicamento"]
+function filtrarTipoMedicamento() {
+    let forma = document.getElementById("frmBusquedaTipoMedicamento");
+    let frm = new FormData(forma);
+    fetchpost("TipoMedicamento/FiltrarTipoMedicamento", "json", frm, function (data) {
+        document.getElementById("divContenedorTabla").innerHTML = generarTabla(data);
     });
-}
 
-function filtarTipoMedicamento() {
-    let descripcion = get("txtDescripcion");
-    if (descripcion == "") {
-        listarTipoMedicamento();
-    } else {
-        objTipoMedicamento.url = "TipoMedicamento/FiltrarTipoMedicamento?descripcion=" + descripcion;
-        pintar(objTipoMedicamento);
-    }
 }
 function guardarTipoMedicamento() {
     let frmGuardar = document.getElementById("frmGuardarTipoMedicamento");
@@ -49,9 +36,15 @@ function guardarTipoMedicamento() {
     fetchpost("TipoMedicamento/guardarTipoMedicamento", "text", frm, function (res) {
         if (res == "1") {
             listarTipoMedicamento();
-            LimpiarDatos("frmGuardarTipoMedicamento");
-        } else {
-            alert("Ocurrio un error al guardar el tipo de medicamento");
         }
     });
+}
+
+function LimpiarTipoMedicamento(){
+    LimpiarDatos("frmGuardarTipoMedicamento");
+    listarTipoMedicamento();
+}
+function LimpiarTipoMedicamentoB() {
+    LimpiarDatos("frmBusquedaTipoMedicamento");
+    listarTipoMedicamento();
 }

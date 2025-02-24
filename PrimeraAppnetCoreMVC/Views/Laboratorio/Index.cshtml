@@ -39,10 +39,47 @@
                         Limpiar
                     </button>
                 </div>
-            </di>
+            </div>
         </div>
     </div>
 </div>
+</form>
+
+<form id="frmGuardarLaboratorio" method="post">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="txtnombre" name="nombre">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="direccion">Direccion:</label>
+                        <input type="text" class="form-control" id="txtdireccion" name="direccion">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="personacontacto">Persona de Contacto:</label>
+                        <input type="text" class="form-control" id="txtpersonacontacto" name="personacontacto">
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class=" d-grid gap-1">
+                        <button type="button" onclick="guardarLaboratorio()" class="btn btn-primary">
+                            Guardar
+                        </button>
+                        <button type="button" onclick="LimpiarLaboratorioG()" class="btn btn-danger">
+                            Limpiar
+                        </button>
+                    </div>
+                    </di>
+                </div>
+            </div>
+        </div>
 </form>
 
 <div id="divtabla">

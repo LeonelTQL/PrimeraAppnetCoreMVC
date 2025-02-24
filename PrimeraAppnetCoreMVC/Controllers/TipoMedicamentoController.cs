@@ -40,11 +40,6 @@ namespace PrimeraAppnetCoreMVC.Controllers
             return cadenaDato;
         }
 
-        public List<FiltrarMedicamentoCLS> filtrarMedicamento(int idMed, string nombre, int idLab, int idTip)
-        {
-            TipoMedicamentoDAL obj = new TipoMedicamentoDAL();
-            return obj.FiltrarMedicamento(idMed, nombre, idLab, idTip);
-        }
 
         public void eliminarMed(int id)
         {
@@ -52,10 +47,10 @@ namespace PrimeraAppnetCoreMVC.Controllers
             obj.EliminarMedicamento(id);
         }
 
-        public List<TipoMedicamentoCLS> FiltrarTipoMedicamento(string descripcion)
+        public List<TipoMedicamentoCLS> FiltrarTipoMedicamento(TipoMedicamentoCLS objTipoMedicamento)
         {
             TipoMedicamentoBL obj = new TipoMedicamentoBL();
-            List<TipoMedicamentoCLS> lista = obj.filtrarTipoMedicamento(descripcion);
+            List<TipoMedicamentoCLS> lista = obj.filtrarTipoMedicamento(objTipoMedicamento);
             return lista;
         }
 

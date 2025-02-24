@@ -30,7 +30,11 @@ namespace PrimeraAppnetCoreMVC.Controllers
             return obj.filtrarLaboratorio(objLaboratorio);
         }
 
-
+        public int GuardarLaboratorio(listarLaboratorioCLS obj)
+        {
+            LaboratorioBL oSucursal = new LaboratorioBL();
+            return oSucursal.guardarLaboratorio(obj);
+        }
 
     }
 }

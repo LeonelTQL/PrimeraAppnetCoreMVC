@@ -25,8 +25,8 @@ namespace CapaNegocio
 
         public int guardarSucursal(SucursalCLS obj)
         {
-            SucursalDAL oTipoMedicamentoDAL = new SucursalDAL();
-            return oTipoMedicamentoDAL.guardarSucursal(obj);
+            SucursalDAL oSucursalDAL = new SucursalDAL();
+            return oSucursalDAL.guardarSucursal(obj);
         }
     }
 }

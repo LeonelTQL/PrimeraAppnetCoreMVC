@@ -95,5 +95,32 @@ namespace CapaDatos
             }
             return lista;
         }
+
+        public int guardarLaboratorio(listarLaboratorioCLS oLaboratorioCLS)
+        {
+            int rpta = 0;
+
+            using (SqlConnection cn = new SqlConnection(cadenaDato))
+            {
+                cn.Open();
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO Laboratorio (NOMBRE, DIRECCION,PERSONACONTACTO,BHABILITADO) VALUES (@nombre, @direccion,@personacontacto,1)", cn))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.Parameters.AddWithValue("@nombre", oLaboratorioCLS.nombre);
+                        cmd.Parameters.AddWithValue("@direccion", oLaboratorioCLS.direccion);
+                        cmd.Parameters.AddWithValue("@personacontacto", oLaboratorioCLS.personacontacto);
+
+                        rpta = cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
+            }
+            return rpta;
+        }
     }
 }

@@ -4,19 +4,9 @@
 
 <h1>Sucursal</h1>
 
-<div id="divtabla"></div>
 
 <script src="~/js/sucursal.js"></script>
 <script src="~/js/generic.js"></script>
-
-
-<div class="input-group input-group-sm mb-3">
-    <span class="input-group-text">Ingrese la sucursal a recuperar</span>
-    <input type="text" id="txtSucursalId" class="form-control" aria-label="ID de Sucursal">
-</div>
-
-<button type="button" onclick="recuperarSucursales()" class="btn btn-primary">Recuperar</button>
-
 
 <form id="frmBusquedaSucursal" method="post">
     <div class="card mb-4">
@@ -27,20 +17,22 @@
                         <label for="nombre">Nombre:</label>
                         <input type="text" class="form-control" id="txtSucursalNombre" name="nombre">
                     </div>
+                </div>
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="direccion">Direccion:</label>
                         <input type="text" class="form-control" id="txtSucursalDireccion" name="direccion">
                     </div>
                 </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-12">
-                    <button type="button" onclick="filtrarSucursal()" class="btn btn-primary">
-                        Filtrar
-                    </button>
-                    <button type="button" onclick="LimpiarSucursal()" class="btn btn-primary">
-                        Limpiar
-                    </button>
+                <div class="row g-3">
+                    <div class=" d-grid gap-1">
+                        <button type="button" onclick="filtrarSucursal()" class="btn btn-primary">
+                            Filtrar
+                        </button>
+                        <button type="button" onclick="LimpiarSucursal()" class="btn btn-danger">
+                            Limpiar
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,3 +69,13 @@
             </div>
         </div>
 </form>
+
+
+<div id="divtabla"></div>
+
+<div class="input-group input-group-sm mb-3">
+    <span class="input-group-text">Ingrese la sucursal a recuperar</span>
+    <input type="text" id="txtSucursalId" class="form-control" aria-label="ID de Sucursal">
+</div>
+
+<button type="button" onclick="recuperarSucursales()" class="btn btn-primary">Recuperar</button>

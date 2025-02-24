@@ -8,7 +8,9 @@ async function listarLaboratorio() {
         url: "Laboratorio/listarLaboratorio",
         cabeceras: ["ID Laboratorio", "Nombre Laboratorio", "Direccion", "Persona de contacto"],
         propiedades: ["idLaboratorio", "nombre", "direccion", "personacontacto"],
-        divContenedorTabla: "divContenedorTabla"
+        divContenedorTabla: "divContenedorTabla",
+        editar: true,
+        eliminar: true
     };
     pintar(objLaboratorio);
 }
@@ -39,5 +41,21 @@ function LimpiarLaboratorio() {
     //setN("txtnombre", "");
     //setN("txtdireccion", "");
     //setN("txtpersonacontacto", "");
+    listarLaboratorio();
+}
+
+function guardarLaboratorio() {
+    let forma = document.getElementById("frmGuardarLaboratorio");
+    let frm = new FormData(forma);
+    fetchpost("Laboratorio/GuardarLaboratorio", "text", frm, function (res) {
+        if (res === "1") {
+            listarLaboratorio();
+
+        }
+    });
+}
+
+function LimpiarLaboratorioG() {
+    LimpiarDatos("frmGuardarLaboratorio");
     listarLaboratorio();
 }

@@ -19,16 +19,16 @@ namespace CapaNegocio
         }
 
 
-        public List<FiltrarMedicamentoCLS> filtrarMedicamento(int idMed, string nombre, int idLab, int idTip)
-        {
-            TipoMedicamentoDAL obj = new TipoMedicamentoDAL();
-            return obj.FiltrarMedicamento(idMed, nombre, idLab, idTip);
-        }
+        //public List<FiltrarMedicamentoCLS> filtrarMedicamento(int idMed, string nombre, int idLab, int idTip)
+        //{
+        //    TipoMedicamentoDAL obj = new TipoMedicamentoDAL();
+        //    return obj.FiltrarMedicamento(idMed, nombre, idLab, idTip);
+        //}
 
-        public List<TipoMedicamentoCLS> filtrarTipoMedicamento(string descripcion)
+        public List<TipoMedicamentoCLS> filtrarTipoMedicamento(TipoMedicamentoCLS obj)
         {
-            TipoMedicamentoDAL obj = new TipoMedicamentoDAL();
-            return obj.filtrarTipoMedicamento(descripcion);
+            TipoMedicamentoDAL oTipoMedicamentoDAL = new TipoMedicamentoDAL();
+            return oTipoMedicamentoDAL.filtrarTipoMedicamento(obj);
         }
 
         public int guardarTipoMedicamento(TipoMedicamentoCLS obj)
