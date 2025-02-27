@@ -163,3 +163,57 @@ function recuperar(url, idFormulario) {
         }
     });
 }
+
+
+
+function Confirmacion(titulo = "Confirmacion", texto = "Desea guardar los cambios", callback) {
+    return Swal.fire({
+        title: titulo,
+        text: texto,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si",
+        cancelButtonText: "No"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            callback();
+        }
+    });
+}
+
+function Exito() {
+    toastr.options = {
+        "closeButton": true,
+        //"debug": false,
+        //"newestOnTop": false,
+        //"progressBar": false,
+        "positionClass": "toast-top-right",
+        //"preventDuplicates": false,
+        //"onclick": null,
+        //"showDuration": "300",
+        //"hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        //"showEasing": "swing",
+        //"hideEasing": "linear",
+        //"showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
+    toastr.success("Guardado correctamente");
+}
+
+function Error() {
+    toastr.options = {
+        "positionClass": "toast-top-right",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    toastr.error("No se pudo guardar");
+}

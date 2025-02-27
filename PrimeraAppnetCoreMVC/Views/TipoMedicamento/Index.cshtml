@@ -76,6 +76,38 @@
     </div>
 </form>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Tipo de Medicamento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="frmEditarTipoMedicamento" method="post">
+                    <div class="mb-3">
+                        <label for="txtidMedicamentoModal" class="form-label">ID Medicamento</label>
+                        <input type="text" class="form-control" id="txtidMedicamentoModal" name="idMedicamento" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtnombreModal" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="txtnombreModal" name="nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtdescripcionModal" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="txtdescripcionModal" name="descripcion">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarEdicion()">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div id="divtabla">
 </div>
 

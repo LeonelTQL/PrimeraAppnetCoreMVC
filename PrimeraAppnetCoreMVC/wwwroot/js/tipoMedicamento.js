@@ -55,5 +55,40 @@ function LimpiarTipoMedicamentoB() {
 }
 
 function Editar(id) {
-    recuperar("TipoMedicamento/recuperarTipoMedicamento?idTipoMedicamento=" + id, "frmGuardarTipoMedicamento");
+
+    fetchGet("TipoMedicamento/recuperarTipoMedicamento?idTipoMedicamento=" + id, "json", function (medicamento) {
+        if (medicamento) {
+
+            document.getElementById("txtidMedicamentoModal").value = medicamento.idMedicamento;
+            document.getElementById("txtnombreModal").value = medicamento.nombre;
+            document.getElementById("txtdescripcionModal").value = medicamento.descripcion;
+
+
+            var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+                keyboard: false
+            });
+            myModal.show();
+        } else {
+            console.error('No se encontraron datos para el medicamento');
+        }
+    });
+}
+
+function guardarEdicion() {
+    let frmEditar = document.getElementById("frmEditarTipoMedicamento");
+    let frm = new FormData(frmEditar);
+
+
+    Confirmacion("Confirmar", "¿Desea guardar los cambios?", function () {
+        fetchpost("TipoMedicamento/editarTipoMedicamento", "text", frm, function (res) {
+            if (res == "1") {
+                Exito();
+                listarTipoMedicamento();
+                var modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+                modal.hide();
+            } else {
+                Error();
+            }
+        });
+    });
 }
